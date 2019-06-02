@@ -1,6 +1,7 @@
 package com.decta.idcard.controller;
 
 import com.decta.idcard.address.AddressDTO;
+import com.decta.idcard.client.ClientDTO;
 import com.decta.idcard.corporateclient.EnterpriseDTO;
 import com.decta.idcard.idcardnumber.IdCardNumberDTO;
 import com.decta.idcard.idcardnumber.IdCardNumberEntity;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CONFLICT;
 
 @RestController
 @RequestMapping("/app")
@@ -29,12 +33,18 @@ public class ClientRegistrationController {
     }
 
     @PostMapping("/private")
-    public StatusDTO registerPrivateClient(@RequestBody IdCardNumberDTO idCard, AddressDTO addressDTO) {
-        return clientRegistrationService.registerPrivateClient(idCard, addressDTO);
+    public StatusDTO registerPrivateClient(@RequestBody ClientDTO client, IdCardNumberDTO idCard, AddressDTO addressDTO) {
+        return clientRegistrationService.registerPrivateClient(client, idCard, addressDTO);
     }
 
-    @GetMapping("/private/{idCard}")
-    public List<IdCardNumberEntity> findClientByIdCard(@PathVariable("idCard") String idCardNumber) {
-        return clientRegistrationService.findClientByIdCard(idCardNumber);
+
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    void handleIllegalArgument() {
+    }
+
+    @ResponseStatus(CONFLICT)
+    @ExceptionHandler(IllegalStateException.class)
+    void handleIllegalState() {
     }
 }

@@ -14,10 +14,10 @@ public class ClientEntity {
     private String name;
     private String surname;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private IdCardNumberEntity idCardNumberEntity;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity addressEntity;
 
     public Long getId() {

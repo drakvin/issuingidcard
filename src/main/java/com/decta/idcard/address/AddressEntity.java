@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class AddressEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -39,7 +40,6 @@ public class AddressEntity {
     public void setStreet(String street) {
         this.street = street;
     }
-
 
 
     public Long getId() {

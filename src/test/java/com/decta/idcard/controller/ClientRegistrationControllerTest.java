@@ -50,15 +50,6 @@ public class ClientRegistrationControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void findClientByIdCard() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-                .get("/app/private/{idCard}", 1)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
 
     public static String asJsonString(final Object obj) {
         try {

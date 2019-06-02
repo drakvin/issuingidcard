@@ -4,7 +4,6 @@ public class IdCardNumberDTO {
 
     private String idCardNumber;
 
-
     public String getIdCardNumber() {
         return idCardNumber;
     }
